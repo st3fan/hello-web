@@ -23,8 +23,14 @@ func main() {
 		port = "8080"
 	}
 
+	message := os.Getenv("MESSAGE")
+	if message == "" {
+		message = "Bonjour!"
+	}
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		data := map[string]string{
+			"Message":  message,
 			"Hostname": r.Host,
 		}
 		t.ExecuteTemplate(w, "index.html.tmpl", data)
