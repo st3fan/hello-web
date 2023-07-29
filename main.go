@@ -30,6 +30,10 @@ func main() {
 		t.ExecuteTemplate(w, "index.html.tmpl", data)
 	})
 
+	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	})
+
 	log.Println("Listening on", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
